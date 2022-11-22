@@ -13,12 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
     </>
     
   )
-
 }
 
-
 /* 
-
 _app  vs  index
 
 index는 사이트 경로에 액세스하는 경우에만 렌더링

@@ -6,7 +6,7 @@ import { listType } from "../../../types";
 export default function write() {
 
     const [board, setBoard] = useState<listType>(
-        { userId: '', id: 0, title: '', content: '' }
+        { id: 0, title: '', userId: '', content: '' }
     );
 
     // Router를 사용하여 id값 도출
@@ -23,21 +23,32 @@ export default function write() {
         })
     }
 
+    // // 등록 onClick
+    // const handleSubmit = () => {
+    //     postBoard();
+    //     router.push("/board/list");
+    // }
+    // const postBoard = async () => {////
+    //     try {
+    //         const response = await axios.post(`http://localhost:8000/data`, {
+    //             title: board.title,
+    //             userId: board.userId,
+    //             content: board.content,
+    //         });
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+
     // 등록 onClick
-    const handleSubmit = () => {
-        postBoard();
-        router.push("/board/list");
-    }
-    const postBoard = async () => {
-        try {
-            const response = await axios.post(`http://localhost:8000/data`, {
-                title: board && board.title,
-                userId: board && board.userId,
-                content: board && board.content,
-            });
-        } catch (error) {
-            console.error(error);
-        }
+    const handleSubmit = async () => {
+        await axios.post(`http://localhost:8000/data`, {
+                title: board.title,
+                userId: board.userId,
+                content: board.content,
+            })
+            .then(()=>router.push("/board/list"))
+            .catch((err)=>console.error("handleSubmit ERROR : " + err));
     }
     
     return (

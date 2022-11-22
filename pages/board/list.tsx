@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import axios from "axios";
 import { listType } from "../../types";
 
@@ -8,18 +7,27 @@ export default function BoardList() {
 
   const [board, setBoard] = useState([]);
 
-  // 게시판 목록 가져오기
-  useEffect(() => {
-    list().then(res => setBoard(res))
-  }, [])
+  // // 게시판 목록 가져오기
+  // useEffect(() => {
+  //   list().then(res => setBoard(res))
+  // }, [])
 
+  // const list = async () => {
+  //   const response = await axios.get(
+  //     'http://localhost:8000/data'
+  //   );
+  //   return response.data
+  // }
+
+  // 게시판 목록 가져오기
   const list = async () => {
-    const response = await axios.get(
-      'http://localhost:8000/data'
-    );
-    return response.data
+    await axios.get('http://localhost:8000/data')
+      .then(res => setBoard(res.data));
   }
- 
+  useEffect(() => {
+    list();
+  },[]);
+
   // 페이지 이동시 사용할 라우터
   const router = useRouter();
 
@@ -41,11 +49,9 @@ export default function BoardList() {
         </div>
         <div className="tbody">
           {board.map((content: listType, index:number) => (
-            <div key={content.id} className="tr">
+            <div key={content.id} className="tr" onClick={()=>router.push(`/board/detail/${content.id}`)}>
               <span className="td1">{index+1}</span>
-              <Link href={`/board/detail/${content.id}`}>
-                <span className="td2">{content.title}</span>
-              </Link>
+              <span className="td2">{content.title}</span>
               <span className="td3">{content.content}</span>
               <span className="td4">{content.userId}</span>
             </div>

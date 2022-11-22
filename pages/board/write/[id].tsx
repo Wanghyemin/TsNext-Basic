@@ -6,7 +6,7 @@ import { listType } from "../../../types";
 export default function modify() {
 
   const [board, setBoard] = useState<listType>(
-    { userId: '', id: 0, title: '', content: '' }
+    { id: 0, title: '', userId: '', content: '' }
   );
 
   // Router를 사용하여 id값 도출
@@ -14,15 +14,13 @@ export default function modify() {
   const id: number = Number(router.query.id);
 
   const detail = async () => {
-    const response = await axios.get(
-      `http://localhost:8000/data/${id}`
-    );
-    return response.data
+    await axios.get(`http://localhost:8000/data/${id}`)
+      .then(res => setBoard(res.data))
   }
 
   useEffect(() => {
-    detail().then(res => setBoard(res));
-  }, [id])
+    detail();
+  }, [])
 
   // onChagne에 대한 EventListener
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -34,20 +32,15 @@ export default function modify() {
     })
   }
   // 수정 onClick
-  const handleSubmit = () => {
-    putBoard();
-    router.push("/board/list");
-  }
-  const putBoard = async () => {
-    try {
-      const response = await axios.put(`http://localhost:8000/data/${id}`, {
-        title: board && board.title,
-        userId: board && board.userId,
-        content: board && board.content,
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSubmit = async () => {
+    const response = await axios.put(`http://localhost:8000/data/${id}`, {
+      title: board.title,
+      userId: board.userId,
+      content: board.content,
+    })
+      .then(() => router.push("/board/list"))
+      .catch(error => console.error(error))
+
   }
 
   return (
