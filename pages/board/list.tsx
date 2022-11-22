@@ -7,18 +7,6 @@ export default function BoardList() {
 
   const [board, setBoard] = useState([]);
 
-  // // 게시판 목록 가져오기
-  // useEffect(() => {
-  //   list().then(res => setBoard(res))
-  // }, [])
-
-  // const list = async () => {
-  //   const response = await axios.get(
-  //     'http://localhost:8000/data'
-  //   );
-  //   return response.data
-  // }
-
   // 게시판 목록 가져오기
   const list = async () => {
     await axios.get('http://localhost:8000/data')
