@@ -31,12 +31,6 @@
       "id": 11
     },
     {
-      "title": "폼태그 제거",
-      "userId": "작성",
-      "content": "작성내용",
-      "id": 13
-    },
-    {
       "title": "게시글 등록합니다.",
       "userId": "작성자",
       "content": "게시글 등록중입니다.",
@@ -47,6 +41,18 @@
       "userId": "등ㄺ",
       "content": "등록내용",
       "id": 15
+    },
+    {
+      "title": "a",
+      "userId": "aa",
+      "content": "aaa",
+      "id": 16
+    },
+    {
+      "title": "formik 테스트",
+      "userId": "formik",
+      "content": "Formik 테스트 진행합니다.",
+      "id": 17
     }
   ]
 }

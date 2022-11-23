@@ -8,36 +8,22 @@ import * as Yup from "yup";
 
 export default function write() {
 
-    const [board, setBoard] = useState<listType>(
-        { id: 0, title: '', userId: '', content: '' }
-    );
-
     // Router를 사용하여 id값 도출
     const router = useRouter();
     const id: number = Number(router.query.id);
 
-    // onChagne에 대한 EventListener
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const name: string = event.target.name;
-        const value: string | number = event.target.value;
-        setBoard({
-            ...board,
-            [name]: value
-        })
-    }
-
     // 등록 onClick
-    const handleSubmit = async () => {
+    async function  handleSubmit(values:FormikValues) {
         await axios.post(`http://localhost:8000/data`, {
-                title: board.title,
-                userId: board.userId,
-                content: board.content,
+                title: values.title,
+                userId: values.userId,
+                content: values.content,
             })
             .then(()=>router.push("/board/list"))
             .catch((err)=>console.error("handleSubmit ERROR : " + err));
     }
 
-    //formik
+    // Formik : onChange를 자동으로 할 수 있음 + 유효성 검사를 간편하게 해줌
     const formik = useFormik({
         initialValues:{
             title:"",
@@ -46,20 +32,20 @@ export default function write() {
         },
         onSubmit: (values:FormikValues) => {
             alert(JSON.stringify(values,null,2));
+            handleSubmit(values);
         },
         validationSchema: Yup.object({
             title: Yup.string()
-                .max(15, "Must be 15 Characters or less")
+                .max(30, "최대 30자만 가능합니다.")
                 .required("Required"),
             userId: Yup.string()
-                .max(15, "Must be 15 Characters or less")
+                .max(10, "최대 10자만 가능합니다.")
                 .required("Required"),
             content: Yup.string()
-                .max(200, "Must be 200 Characters or less")
+                .max(500, "최대 500자만 가능합니다.")
                 .required("Required"),
          })
     });
-
     
     return (
         <>

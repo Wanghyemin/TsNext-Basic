@@ -2,12 +2,10 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { listType } from "../../../types";
+import { Formik, FormikValues, useFormik } from "formik";
+import * as Yup from "yup";
 
 export default function modify() {
-
-  const [board, setBoard] = useState<listType>(
-    { id: 0, title: '', userId: '', content: '' }
-  );
 
   // Router를 사용하여 id값 도출
   const router = useRouter();
@@ -15,59 +13,74 @@ export default function modify() {
 
   const detail = async () => {
     await axios.get(`http://localhost:8000/data/${id}`)
-      .then(res => setBoard(res.data))
+      .then(res => {
+        formik.setValues;
+        console.log(formik.values.title)
+      })
   }
-
+  
   useEffect(() => {
     detail();
   }, [])
 
-  // onChagne에 대한 EventListener
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const name: string = event.target.name;
-    const value: string | number = event.target.value;
-    setBoard({
-      ...board,
-      [name]: value
-    })
-  }
   // 수정 onClick
-  const handleSubmit = async () => {
+  const handleSubmit = async (values:FormikValues) => {
     const response = await axios.put(`http://localhost:8000/data/${id}`, {
-      title: board.title,
-      userId: board.userId,
-      content: board.content,
+      title: values.title,
+      userId: values.userId,
+      content: values.content,
     })
       .then(() => router.push("/board/list"))
       .catch(error => console.error(error))
-
   }
 
+    // Formik : onChange를 자동으로 할 수 있음 + 유효성 검사를 간편하게 해줌
+    const formik = useFormik({
+      initialValues:{
+          title: "",
+          userId: "",
+          content: ""
+      },
+      onSubmit: (values:FormikValues) => {
+          handleSubmit(values);
+      },
+      validationSchema: Yup.object({
+          title: Yup.string()
+              .max(30, "최대 30자만 가능합니다.")
+              .required("Required"),
+          userId: Yup.string()
+              .max(10, "최대 10자만 가능합니다.")
+              .required("Required"),
+          content: Yup.string()
+              .max(500, "최대 500자만 가능합니다.")
+              .required("Required"),
+       })
+  });
   return (
     <>
-      <div>
+     <form onSubmit={formik.handleSubmit}>
         <h1>게시글 수정</h1>
         <div className="table">
           <div className="dttr">
             <span className="dt1">No</span>
-            <span className="dt2">{board && board.id}</span>
+            <span className="dt2"></span>
           </div>
           <div className="dttr">
             <span className="dt1">제목</span>
-            <span className="dt2"><input name="title" type="text" value={board && board.title} onChange={handleChange} /></span>
+            <span className="dt2"><input id="title" type="text" {...formik.getFieldProps('title')}/></span>
           </div>
           <div className="dttr">
             <span className="dt1">작성자</span>
-            <span className="dt2"><input name="userId" type="text" value={board && board.userId} onChange={handleChange} /></span>
+            <span className="dt2"><input id="userId" type="text" {...formik.getFieldProps('userId')} /></span>
           </div>
           <div className="dttr2">
             <span className="dt1">내용</span>
-            <span className="dt2"><textarea name="content" value={board && board.content} onChange={handleChange}></textarea></span>
+            <span className="dt2"><textarea id="content" {...formik.getFieldProps('content')}></textarea></span>
           </div>
         </div>
-        <button className="button" onClick={handleSubmit}>수정</button>
+        <button className="button" type="submit">수정</button>
         <button className="button" onClick={() => router.push("/board/list")}>목록</button>
-      </div>
+      </form>
     </>
   )
 }
