@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { listType } from "../../types";
+import { Box, Button, ButtonGroup } from '@chakra-ui/react'
 
 export default function BoardList() {
 
@@ -21,27 +22,28 @@ export default function BoardList() {
 
   return (
     <>
+
       <h1>공지사항</h1>
       <div>
-        <div className="right">
-          <button className="button" onClick={() => router.push("/board/write")} > 등  록 </button>
+        <div>
+          <Button bgColor={"#FEB2B2"} textColor={"white"} variant='solid' onClick={() => router.push("/board/write")} > 등  록 </Button>
           <h3>총  {board.length} 건</h3>
         </div>
-        <div className="thead">
+        <div>
           <div>
-            <span className="td1">번호</span>
-            <span className="td2">제목</span>
-            <span className="td3">내용</span>
-            <span className="td4">작성자</span>
+            <span>번호</span>
+            <span>제목</span>
+            <span>내용</span>
+            <span>작성자</span>
           </div>
         </div>
-        <div className="tbody">
+        <div>
           {board.map((content: listType, index:number) => (
-            <div key={content.id} className="tr" onClick={()=>router.push(`/board/detail/${content.id}`)}>
-              <span className="td1">{index+1}</span>
-              <span className="td2">{content.title}</span>
-              <span className="td3">{content.content}</span>
-              <span className="td4">{content.userId}</span>
+            <div key={content.id} onClick={()=>router.push(`/board/detail/${content.id}`)}>
+              <span>{index+1}</span>
+              <span>{content.title}</span>
+              <span>{content.content}</span>
+              <span>{content.userId}</span>
             </div>
           ))}
         </div>

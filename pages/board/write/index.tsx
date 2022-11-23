@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { listType } from "../../../types";
 import { FormikValues, useFormik } from "formik";
 import * as Yup from "yup";
+import { Box, Button, ButtonGroup } from '@chakra-ui/react'
 
 
 export default function write() {
@@ -51,28 +52,28 @@ export default function write() {
         <>
             <form onSubmit={formik.handleSubmit}>
                 <h1>게시글 등록</h1>
-                <div className="table">
-                    <div className="dttr">
-                        <span className="dt1">제목</span>
-                        <span className="dt2">
+                <div>
+                    <div>
+                        <span>제목</span>
+                        <span>
                             <input id="title" type="text" {...formik.getFieldProps('title')}  />
                         </span>
                         {formik.touched.title && formik.errors.title ? (
                             <span>{formik.errors.title}</span>
                             ) : null}
                     </div>
-                    <div className="dttr">
-                        <span className="dt1">작성자</span>
-                        <span className="dt2">
+                    <div>
+                        <span>작성자</span>
+                        <span>
                             <input id="userId" type="text" {...formik.getFieldProps('userId')}/>
                         </span>
                         {formik.touched.userId && formik.errors.userId ? (
                             <span>{formik.errors.userId}</span>
                             ) : null}
                     </div>
-                    <div className="dttr2">
-                        <span className="dt1">내용</span>
-                        <span className="dt2">
+                    <div>
+                        <span>내용</span>
+                        <span>
                             <textarea id="content" {...formik.getFieldProps('content')}>
                             </textarea>
                         </span>
@@ -81,8 +82,8 @@ export default function write() {
                             ) : null}
                     </div>
                 </div>
-                <button className="button" type="submit">등록</button>
-                <button className="button" onClick={() => router.push("/board/list")}>취소</button>
+                <Button bgColor={"#FEB2B2"} textColor={"white"} variant='solid' m={1} type="submit" > 등  록 </Button>
+                <Button bgColor={"#ED64A6"} textColor={"white"} variant='solid' m={1} onClick={() => router.push("/board/list")} > 목  록 </Button>
             </form>
         </>
     )

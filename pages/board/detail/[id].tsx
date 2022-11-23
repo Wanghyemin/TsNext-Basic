@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { listType } from "../../../types";
+import { Box, Button, ButtonGroup } from '@chakra-ui/react'
 
 export default function detail() {
 
@@ -33,27 +34,27 @@ export default function detail() {
         <>
             <div>
                 <h1>{board.title||"해당 게시글이 없습니다."}</h1>
-                <div className="table">
-                    <div className="dttr">
-                        <span className="dt1">No</span>
-                        <span className="dt2">{board.id}</span>
+                <div>
+                    <div>
+                        <span>No</span>
+                        <span>{board.id}</span>
                     </div>
-                    <div className="dttr">
-                        <span className="dt1">제목</span>
-                        <span className="dt2">{board.title}</span>
+                    <div>
+                        <span>제목</span>
+                        <span>{board.title}</span>
                     </div>
-                    <div className="dttr">
-                        <span className="dt1">작성자</span>
-                        <span className="dt2">{board.userId}</span>
+                    <div>
+                        <span>작성자</span>
+                        <span>{board.userId}</span>
                     </div>
-                    <div className="dttr2">
-                        <span className="dt1">내용</span>
-                        <span className="dt2">{board.content}</span>
+                    <div>
+                        <span>내용</span>
+                        <span>{board.content}</span>
                     </div>
                 </div>
-                <button className="button" onClick={()=>router.push(`/board/write/${board.id}`)}>수정</button>
-                <button className="button" onClick={handleDelete}>삭제</button>
-                <button className="button" onClick={()=>router.push("/board/list")}>목록</button>
+                <Button bgColor={"#FEB2B2"} textColor={"white"} variant='solid' m={1} onClick={()=>router.push(`/board/write/${board.id}`)} > 수  정 </Button>
+                <Button bgColor={"#ED64A6"} textColor={"white"} variant='solid' m={1} onClick={() => router.push("/board/list")} > 목  록 </Button>
+                <Button bgColor={"#FEB2B2"} textColor={"white"} variant='solid' m={1} onClick={handleDelete} > 삭  제 </Button>
             </div>
         </>
     )

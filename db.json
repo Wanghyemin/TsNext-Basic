@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "title": "수정합니다.",
+      "title": "수정합니다.fffff",
       "userId": "fourLab",
       "content": "최종 게시글 수정합니다.",
       "id": 3
@@ -33,26 +33,26 @@
     {
       "title": "게시글 등록합니다.",
       "userId": "작성자",
-      "content": "게시글 등록중입니다.",
+      "content": "dfdfdfdfd",
       "id": 14
     },
     {
-      "title": "게시글 등록",
-      "userId": "등ㄺ",
-      "content": "등록내용",
+      "title": "게시글 수정",
+      "userId": "Formik",
+      "content": "게시글 수정 formik 사용해서 완료 ^O^",
       "id": 15
-    },
-    {
-      "title": "a",
-      "userId": "aa",
-      "content": "aaa",
-      "id": 16
     },
     {
       "title": "formik 테스트",
       "userId": "formik",
       "content": "Formik 테스트 진행합니다.",
       "id": 17
+    },
+    {
+      "title": "useFormik",
+      "userId": "forfor",
+      "content": "useformik 으로 작성합니다.",
+      "id": 18
     }
   ]
 }

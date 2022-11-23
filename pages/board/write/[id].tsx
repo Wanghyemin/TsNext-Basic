@@ -4,6 +4,7 @@ import axios from "axios";
 import { listType } from "../../../types";
 import { Formik, FormikValues, useFormik } from "formik";
 import * as Yup from "yup";
+import { Box, Button, ButtonGroup } from '@chakra-ui/react'
 
 export default function modify() {
 
@@ -14,8 +15,9 @@ export default function modify() {
   const detail = async () => {
     await axios.get(`http://localhost:8000/data/${id}`)
       .then(res => {
-        formik.setValues;
-        console.log(formik.values.title)
+        formik.setFieldValue('title', res.data.title);
+        formik.setFieldValue('userId', res.data.userId);
+        formik.setFieldValue('content', res.data.content);
       })
   }
   
@@ -37,6 +39,7 @@ export default function modify() {
     // Formik : onChange를 자동으로 할 수 있음 + 유효성 검사를 간편하게 해줌
     const formik = useFormik({
       initialValues:{
+          id:"",
           title: "",
           userId: "",
           content: ""
@@ -60,26 +63,22 @@ export default function modify() {
     <>
      <form onSubmit={formik.handleSubmit}>
         <h1>게시글 수정</h1>
-        <div className="table">
-          <div className="dttr">
-            <span className="dt1">No</span>
-            <span className="dt2"></span>
+        <div>
+          <div>
+            <span>제목</span>
+            <span><input id="title" type="text" {...formik.getFieldProps('title')}/></span>
           </div>
-          <div className="dttr">
-            <span className="dt1">제목</span>
-            <span className="dt2"><input id="title" type="text" {...formik.getFieldProps('title')}/></span>
+          <div>
+            <span>작성자</span>
+            <span><input id="userId" type="text" {...formik.getFieldProps('userId')} /></span>
           </div>
-          <div className="dttr">
-            <span className="dt1">작성자</span>
-            <span className="dt2"><input id="userId" type="text" {...formik.getFieldProps('userId')} /></span>
-          </div>
-          <div className="dttr2">
-            <span className="dt1">내용</span>
-            <span className="dt2"><textarea id="content" {...formik.getFieldProps('content')}></textarea></span>
+          <div>
+            <span>내용</span>
+            <span><textarea id="content" {...formik.getFieldProps('content')}></textarea></span>
           </div>
         </div>
-        <button className="button" type="submit">수정</button>
-        <button className="button" onClick={() => router.push("/board/list")}>목록</button>
+        <Button bgColor={"#FEB2B2"} textColor={"white"} variant='solid' m={1} type="submit" > 수  정 </Button>
+        <Button bgColor={"#ED64A6"} textColor={"white"} variant='solid' m={1} onClick={() => router.push("/board/list")} > 목  록 </Button>
       </form>
     </>
   )
