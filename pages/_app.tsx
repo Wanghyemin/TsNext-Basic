@@ -4,6 +4,8 @@ import NavBar from '../components/NavBar'
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from "@chakra-ui/react"
 import Head from '../components/Head'
+import { Box, Button, ButtonGroup } from '@chakra-ui/react'
+
 
 const theme = extendTheme({
   colors: {
