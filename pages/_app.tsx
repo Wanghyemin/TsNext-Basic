@@ -1,36 +1,22 @@
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import NavBar from '../components/NavBar'
-import { ChakraProvider } from '@chakra-ui/react'
-import { extendTheme } from "@chakra-ui/react"
 import Head from '../components/Head'
-import { Box, Button, ButtonGroup } from '@chakra-ui/react'
+import NavBar from '../components/NavBar'
+import type { AppProps } from 'next/app'
+import { ChakraProvider } from '@chakra-ui/react'
 
-
-const theme = extendTheme({
-  colors: {
-    brand: {
-      100: "#f7fafc",
-      500: "#gdgdgd",
-      900: "#1a202c",
-    },
-  },
-})
-
-export default function App({ Component, pageProps }: AppProps) {
+const app = ({ Component, pageProps }: AppProps) => {
 
   return (
     <>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider>
         <Head/>
         <NavBar/>
         <Component {...pageProps} />
       </ChakraProvider>
     </>
-    
   )
 }
-
+export default app
 /* 
 _app  vs  index
 

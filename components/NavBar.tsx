@@ -1,14 +1,22 @@
 import Link from "next/link";
-import { Box, Button, ButtonGroup, Icon, Text } from "@chakra-ui/react";
+import { Tabs, TabList, Tab, Box, ChakraProvider } from "@chakra-ui/react";
 
-export default function NavBar() {
+const NavBar : React.FC = () => {
   return (
     <>
-      <Box w="100%" h="30px" bgGradient="linear(to-t, white, yellow.200)" textAlign={"right"} textColor={"pink.300"}>
-        <Link href="/"> 홈 </Link>
-        <Link href="/board/list"> 공지사항 </Link>
-        <Link href="/board/write"> 글작성 </Link>
+      <Box w="100%" h="30px" bgGradient="linear(to-t, white, yellow.100)" textAlign={"right"} textColor={"pink.300"}>
       </Box>
+
+      <ChakraProvider >
+        <Tabs w={"80%"} align="end" variant="soft-rounded" colorScheme="yellow">
+          <TabList>
+            <Tab><Link href ="/">홈</Link></Tab>
+            <Tab><Link href ="/board/list">게시판</Link></Tab>
+            <Tab><Link href ="/board/write">글쓰기</Link></Tab>
+          </TabList>
+        </Tabs>
+      </ChakraProvider>
     </>
   );
 }
+export default NavBar

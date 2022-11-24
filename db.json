@@ -9,7 +9,7 @@
     {
       "title": "테스트",
       "userId": 2,
-      "content": "rum ut voluptate autem\nvoluptatem repellendus aspernatur dolorem in",
+      "content": "Chakra Ui 적용합니다.",
       "id": 6
     },
     {
@@ -31,8 +31,8 @@
       "id": 11
     },
     {
-      "title": "게시글 등록합니다.",
-      "userId": "작성자",
+      "title": "게시글 등록",
+      "userId": "작성",
       "content": "dfdfdfdfd",
       "id": 14
     },
@@ -53,6 +53,30 @@
       "userId": "forfor",
       "content": "useformik 으로 작성합니다.",
       "id": 18
+    },
+    {
+      "title": "챠크라 테스트",
+      "userId": "포랩보드",
+      "content": "챠크라 적용합니다",
+      "id": 19
+    },
+    {
+      "title": "공통모듈 만들기",
+      "userId": "모듀리",
+      "content": "공통모듈 만들기",
+      "id": 20
+    },
+    {
+      "title": "공통모듈",
+      "userId": "공통모듈",
+      "content": "공통모듈",
+      "id": 21
+    },
+    {
+      "title": "ㅁㅁ",
+      "userId": "ㅁㅁ",
+      "content": "ㅁㅁ",
+      "id": 22
     }
   ]
 }

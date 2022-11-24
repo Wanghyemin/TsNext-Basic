@@ -1,7 +1,6 @@
-import Link from "next/link";
-import { Box, Button, ButtonGroup, Icon, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
-export default function Head() {
+const Head : React.FC = () => {
   return (
     <>
         <Box w="100%" h="20px" bgGradient="linear(to-t, pink.100, white)"></Box>
@@ -17,3 +16,5 @@ export default function Head() {
     </>
   );
 }
+
+export default Head

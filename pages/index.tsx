@@ -1,8 +1,16 @@
+import { Text } from '@chakra-ui/react'
 
-export default function Home() {
+const Home = () => {
   return (
     <>
-      <h1>메인페이지</h1>
+      <Text
+      bgGradient="linear(to-l, yellow, #FF0080)"
+      bgClip="text"
+      fontSize="6xl"
+      fontWeight="extrabold"
+      textAlign="center"
+      >FourLab Home</Text>
     </>
   );
 }
+export default Home
