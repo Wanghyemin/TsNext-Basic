@@ -2,10 +2,9 @@ import commonAxios from "../../../commonModules/CommonAxios";
 import PinkButton from "../../../components/atoms/PinkButton";
 import PurpleButton from "../../../components/atoms/PurpleButton";
 import { useRouter } from "next/router";
-import { FormikValues, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Flex, Input, Textarea, Table, Tbody, Tfoot, Tr, Td, TableContainer } from "@chakra-ui/react";
-
 
 const write = () => {
   // Router를 사용하여 id값 도출
@@ -14,6 +13,7 @@ const write = () => {
 
   // 등록 onClick
   async function handleSubmit() {
+    console.log(formik);
     await commonAxios
       .post(`/data`, {
         title: formik.values.title,
@@ -23,7 +23,7 @@ const write = () => {
       .then(() => router.push("/board/list"))
   }
 
-  // Formik : onChange를 자동으로 할 수 있음 + 유효성 검사를 간편하게 해줌
+  //Formik : onChange를 자동으로 할 수 있음 + 유효성 검사를 간편하게 해줌
   const formik = useFormik({
     initialValues: {
       title: "",

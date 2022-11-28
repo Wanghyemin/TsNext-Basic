@@ -3,7 +3,7 @@ import { listType } from "../../types";
 import PinkButton from "../../components/atoms/PinkButton";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Flex, Table,  Thead,  Tbody,  Tfoot,  Tr,  Th,  Td,  TableContainer } from "@chakra-ui/react";
+import { Flex, Table,  Thead,  Tbody,  Tfoot,  Tr,  Th,  Td,  TableContainer, useQuery } from "@chakra-ui/react";
 
 
 const boardList = () => {
@@ -65,4 +65,5 @@ const boardList = () => {
     </>
   );
 }
+
 export default boardList
