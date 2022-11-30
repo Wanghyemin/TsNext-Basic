@@ -1,27 +1,18 @@
-import commonAxios from "../../../commonModules/CommonAxios";
 import PinkButton from "../../../components/atoms/PinkButton";
 import PurpleButton from "../../../components/atoms/PurpleButton";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Flex, Input, Textarea, Table, Tbody, Tfoot, Tr, Td, TableContainer } from "@chakra-ui/react";
+import { useMutation } from "react-query";
+import { postBoardDetailAxios } from "../../../commonModules/CommonAxios";
+
 
 const write = () => {
   // Router를 사용하여 id값 도출
   const router = useRouter();
   const id: number = Number(router.query.id);
-
-  // 등록 onClick
-  async function handleSubmit() {
-    console.log(formik);
-    await commonAxios
-      .post(`/data`, {
-        title: formik.values.title,
-        userId: formik.values.userId,
-        content: formik.values.content,
-      })
-      .then(() => router.push("/board/list"))
-  }
+  const { mutate } = useMutation( postBoardDetailAxios );
 
   //Formik : onChange를 자동으로 할 수 있음 + 유효성 검사를 간편하게 해줌
   const formik = useFormik({
@@ -31,7 +22,12 @@ const write = () => {
       content: "",
     },
     onSubmit: () => {
-      handleSubmit();
+      mutate({
+        title : formik.values.title,
+        userId : formik.values.userId,
+        content : formik.values.content
+      })
+      router.push("/board/list");
     },
     validationSchema: Yup.object({
       title: Yup.string()

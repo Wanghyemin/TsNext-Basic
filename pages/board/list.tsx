@@ -1,23 +1,15 @@
-import commonAxios from "../../commonModules/CommonAxios";
+
 import { listType } from "../../types";
 import PinkButton from "../../components/atoms/PinkButton";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Flex, Table,  Thead,  Tbody,  Tfoot,  Tr,  Th,  Td,  TableContainer, useQuery } from "@chakra-ui/react";
+import {  useQuery } from 'react-query';
+import { Flex, Table,  Thead,  Tbody,  Tfoot,  Tr,  Th,  Td,  TableContainer} from "@chakra-ui/react";
+import { getBoardListAxios } from "../../commonModules/CommonAxios";
 
 
 const boardList = () => {
-  const [board, setBoard] = useState([]);
-
-  // 게시판 목록 가져오기
-  const list = async () => {
-    await commonAxios.get("/data")
-      .then((res) => setBoard(res.data));
-  };
-
-  useEffect(() => {
-    list();
-  }, []);
+  //const [board, setBoard] = useState([]);
+  const query = useQuery('data',getBoardListAxios,{cacheTime: 5000});//option
 
   // 페이지 이동시 사용할 라우터
   const router = useRouter();
@@ -36,7 +28,7 @@ const boardList = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {board.map((content: listType, index: number) => (
+              {query.data?.map((content: listType, index: number) => (
                 <Tr key={content.id}>
                   <Td>{index + 1}</Td>
                   <Td
@@ -53,7 +45,7 @@ const boardList = () => {
               <Tr>
                 <Th></Th>
                 <Th></Th>
-                <Th>총 {board.length} 건</Th>
+                <Th>총 {query.data?.length} 건</Th>
                 <Th>
                   <PinkButton onClick={() => router.push("/board/write")}> 등 록 </PinkButton>
                 </Th>

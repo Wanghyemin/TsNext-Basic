@@ -1,6 +1,6 @@
 export interface listType {
     userId: string,
-    id: number,
+    id?: number,
     title: string,
     content: string
   }

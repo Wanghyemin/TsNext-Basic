@@ -1,51 +1,39 @@
-import commonAxios from "../../../commonModules/CommonAxios";
+
 import PinkButton from "../../../components/atoms/PinkButton";
 import PurpleButton from "../../../components/atoms/PurpleButton";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Flex, Table, Tbody, Tfoot, Tr, Td, TableContainer, Textarea, Input } from "@chakra-ui/react";
+import { useMutation, useQuery } from "react-query";
+import { getBoardDetailAxios, putBoardDetailAxios } from "../../../commonModules/CommonAxios";
+import { useEffect, useLayoutEffect } from "react";
 
 
 const modify = () => {
   // Router를 사용하여 id값 도출
   const router = useRouter();
   const id: number = Number(router.query.id);
-
-  const detail = async () => {
-    await commonAxios.get(`/data/${id}`)
-    .then((res) => {
-      formik.setFieldValue("title", res.data.title);
-      formik.setFieldValue("userId", res.data.userId);
-      formik.setFieldValue("content", res.data.content);
-    });
-  };
-
-  useEffect(() => {
-    detail();
-  }, []);
-
-  // 수정 onClick
-  const handleSubmit = async () => {
-    const response = await commonAxios
-      .put(`http://localhost:8000/data/${id}`, {
-        title: formik.values.title,
-        userId: formik.values.userId,
-        content: formik.values.content,
-      })
-      .then(() => router.push("/board/list"));
-  };
+  const query = useQuery( ['data', id] , () => getBoardDetailAxios(id), {cacheTime: 5000});
+  const { mutate } = useMutation( putBoardDetailAxios );
 
   // Formik : onChange를 자동으로 할 수 있음 + 유효성 검사를 간편하게 해줌
   const formik = useFormik({
     initialValues: {
+      id: 0,
       title: "",
       userId: "",
       content: "",
     },
     onSubmit: () => {
-      handleSubmit();
+      mutate({
+        id: formik.values.id,
+        title: formik.values.title,
+        userId: formik.values.userId,
+        content: formik.values.content,
+      })
+      router.push("/board/list");
     },
     validationSchema: Yup.object({
       title: Yup.string()
@@ -59,6 +47,14 @@ const modify = () => {
         .required("Required"),
     }),
   });
+
+  useEffect(() => {
+    formik.setFieldValue("id", query.data?.id);
+    formik.setFieldValue("title", query.data?.title);
+    formik.setFieldValue("userId", query.data?.userId);
+    formik.setFieldValue("content", query.data?.content);
+  }, [query.data]);
+
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
@@ -68,7 +64,7 @@ const modify = () => {
               <Tbody>
                 <Tr>
                   <Td rowSpan={2}>제목</Td>
-                  <Td>.
+                  <Td>
                     <Input
                       id="title"
                       type="text"

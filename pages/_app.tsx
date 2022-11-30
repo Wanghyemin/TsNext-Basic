@@ -2,18 +2,14 @@ import "../styles/globals.css";
 import Head from "../components/Head";
 import NavBar from "../components/NavBar";
 import type { AppProps } from "next/app";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import {  QueryClient, QueryClientProvider } from "react-query";
 import { ChakraProvider } from "@chakra-ui/react";
 
-const queryClient = new QueryClient();
+
 
 const app = ({ Component, pageProps }: AppProps) => {
+
+  const queryClient = new QueryClient();
   return (
     <>
       <QueryClientProvider client={queryClient}>

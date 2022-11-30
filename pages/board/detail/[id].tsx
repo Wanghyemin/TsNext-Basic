@@ -1,42 +1,26 @@
-import commonAxios from "../../../commonModules/CommonAxios";
-import { listType } from "../../../types";
 import PinkButton from "../../../components/atoms/PinkButton";
 import PurpleButton from "../../../components/atoms/PurpleButton";
-import { useEffect, useState } from "react";
+import { delBoardDetailAxios, getBoardDetailAxios } from "../../../commonModules/CommonAxios";
 import { useRouter } from "next/router";
-import {  Table, Tbody, Tfoot, Tr, Td, TableContainer , Button, Flex } from "@chakra-ui/react";
-
-
-
+import {  Table, Tbody, Tfoot, Tr, Td, TableContainer , Flex } from "@chakra-ui/react";
+import { useMutation, useQuery } from "react-query";
+import React, { useEffect } from "react";
 
 const detail = () => {
-  const [board, setBoard] = useState<listType>({
-    id: 0,
-    title: "",
-    userId: "",
-    content: "",
-  });
 
   const router = useRouter();
-  const id = Number(router.query.id) || "";
+  const id:number = Number(router.query.id);
 
-  useEffect(() => {
-    detail();
-  }, []);
+  // api 요청하는 함수(addTodo) 를 작성했을 경우
+  const { mutate } = useMutation(delBoardDetailAxios);
 
-  // 도출된 id값을 사용한 Detail페이지 출력
-  const detail = async () => {
-    await commonAxios
-      .get(`http://localhost:8000/data/${id}`)
-      .then((res) => setBoard(res.data));
-  };
+  const query = useQuery( ['data', id] , () => getBoardDetailAxios(id), {cacheTime: 5000});
+  //key 로 id를 넣어줘야 새로고침시 데이터 도출된다.
 
-  // 삭제후 목록으로 이동
-  const handleDelete = async () => {
-    await commonAxios
-      .delete(`/data/${board.id}`)
-      .then(() => router.push("/board/list"))
-      .catch((err) => console.error(err));
+  // // 삭제후 목록으로 이동
+  const handleDelete = (event:React.MouseEvent<HTMLButtonElement>) => {
+    mutate(query.data?.id)
+    router.push("/board/list")
   };
 
   return (
@@ -47,25 +31,25 @@ const detail = () => {
             <Tbody>
               <Tr>
                 <Td>No</Td>
-                <Td>{board.id}</Td>
+                <Td>{query.data?.id}</Td>
               </Tr>
               <Tr>
                 <Td>제목</Td>
-                <Td>{board.title}</Td>
+                <Td>{query.data?.title}</Td>
               </Tr>
               <Tr>
                 <Td>작성자</Td>
-                <Td>{board.userId}</Td>
+                <Td>{query.data?.userId}</Td>
               </Tr>
               <Tr>
                 <Td>내용</Td>
-                <Td>{board.content}</Td>
+                <Td>{query.data?.content}</Td>
               </Tr>
             </Tbody>
             <Tfoot>
               <Tr>
                 <Td colSpan={2} style={{ textAlign: "center" }}>
-                  <PinkButton onClick={() => router.push(`/board/write/${board.id}`)}> 수 정 </PinkButton>
+                  <PinkButton onClick={() => router.push(`/board/write/${query.data.id}`)}> 수 정 </PinkButton>
                   <PurpleButton onClick={() => router.push("/board/list")}> 목 록 </PurpleButton>
                   <PinkButton onClick={handleDelete}> 삭 제 </PinkButton>
                 </Td>

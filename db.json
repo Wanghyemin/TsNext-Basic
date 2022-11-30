@@ -1,28 +1,10 @@
 {
   "data": [
     {
-      "title": "수정합니다.fffff",
-      "userId": "fourLab",
-      "content": "최종 게시글 수정합니다.",
-      "id": 3
-    },
-    {
-      "title": "테스트cc",
+      "title": "테스트",
       "userId": 2,
       "content": "Chakra Ui 적용합니다.",
       "id": 6
-    },
-    {
-      "title": "게시글 수정?",
-      "userId": "관리자",
-      "content": "게시글 수정",
-      "id": 8
-    },
-    {
-      "title": "현대트랜시스 동반성장 ",
-      "userId": 2,
-      "content": "v",
-      "id": 10
     },
     {
       "title": "게시글 추가 제목",
@@ -31,28 +13,10 @@
       "id": 11
     },
     {
-      "title": "게시글 등록",
-      "userId": "작성",
-      "content": "dfdfdfdfd",
-      "id": 14
-    },
-    {
-      "title": "게시글 수정",
-      "userId": "Formik",
-      "content": "게시글 수정 formik 사용해서 완료 ^O^",
-      "id": 15
-    },
-    {
       "title": "formik 테스트",
       "userId": "formik",
       "content": "Formik 테스트 진행합니다.",
       "id": 17
-    },
-    {
-      "title": "useFormik",
-      "userId": "forfor",
-      "content": "useformik 으로 작성합니다.",
-      "id": 18
     },
     {
       "title": "챠크라 테스트",
@@ -67,22 +31,28 @@
       "id": 20
     },
     {
-      "title": "공통모듈",
-      "userId": "공통모듈",
-      "content": "공통모듈",
-      "id": 21
+      "title": "mm",
+      "userId": "m",
+      "content": "mm",
+      "id": 24
     },
     {
-      "title": "ㅁㅁ",
-      "userId": "ㅁㅁ",
-      "content": "ㅁㅁ",
-      "id": 22
+      "title": "1212",
+      "userId": "12",
+      "content": "12",
+      "id": 30
     },
     {
-      "title": "?",
-      "userId": "??",
-      "content": "???",
-      "id": 23
+      "title": "a",
+      "userId": "b",
+      "content": "c",
+      "id": 31
+    },
+    {
+      "title": "리액트쿼리등록",
+      "userId": "쿼리",
+      "content": "등록",
+      "id": 32
     }
   ]
 }
