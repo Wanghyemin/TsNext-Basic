@@ -2,45 +2,84 @@
   "data": [
     {
       "title": "테스트",
-      "userId": 2,
+      "userId": "2",
       "content": "Chakra Ui 적용합니다.",
-      "id": 6
+      "id": 6,
+      "adress1": "",
+      "adress2": "",
+      "adress3": ""
     },
     {
       "title": "게시글 추가 제목",
       "userId": "포랩1234",
       "content": "게시글 추가합니다~~~",
-      "id": 11
+      "id": 11,
+      "adress1": "",
+      "adress2": "",
+      "adress3": ""
     },
     {
       "title": "챠크라 테스트",
       "userId": "포랩보드",
       "content": "챠크라 적용합니다",
-      "id": 19
+      "id": 19,
+      "adress1": "",
+      "adress2": "",
+      "adress3": ""
     },
     {
       "title": "공통모듈 만들기",
       "userId": "모듀리",
       "content": "공통모듈 만들기",
-      "id": 20
+      "id": 20,
+      "adress1": "",
+      "adress2": "",
+      "adress3": ""
     },
     {
       "title": "mm",
       "userId": "m",
       "content": "mm",
-      "id": 24
+      "id": 24,
+      "adress1": "",
+      "adress2": "",
+      "adress3": ""
     },
     {
       "title": "1212",
       "userId": "12",
       "content": "12",
-      "id": 30
+      "id": 30,
+      "adress1": "",
+      "adress2": "",
+      "adress3": ""
     },
     {
       "title": "리액트쿼리등록",
       "userId": "쿼리",
       "content": "등록",
-      "id": 32
+      "id": 32,
+      "adress1": "",
+      "adress2": "",
+      "adress3": ""
+    },
+    {
+      "title": "가나다",
+      "userId": "가나다",
+      "content": "가나다",
+      "id": 33,
+      "adress1": "",
+      "adress2": "",
+      "adress3": ""
+    },
+    {
+      "title": "a",
+      "userId": "a",
+      "content": "a",
+      "adress1": "",
+      "adress2": "",
+      "adress3": "",
+      "id": 34
     }
   ]
 }

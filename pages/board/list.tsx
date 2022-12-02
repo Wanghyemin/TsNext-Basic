@@ -38,6 +38,7 @@ const boardList = () => {
                 <Th>번호</Th>
                 <Th>제목</Th>
                 <Th>내용</Th>
+                <Th>주소</Th>
                 <Th>작성자</Th>
               </Tr>
             </Thead>
@@ -51,6 +52,7 @@ const boardList = () => {
                     </Link>
                   </Td>
                   <Td>{content.content}</Td>
+                  <Td>{content.adress}</Td>
                   <Td>{content.userId}</Td>
                 </Tr>
               ))}
@@ -60,6 +62,7 @@ const boardList = () => {
                 <Th></Th>
                 <Th></Th>
                 <Th>총 {changedata?.length} 건</Th>
+                <Th></Th>
                 <Th>
                   <PinkButton>
                     <Link href={`/board/write`}> 등 록 </Link>

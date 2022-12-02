@@ -46,6 +46,10 @@ const detail = () => {
                 <Td>내용</Td>
                 <Td>{query.data?.content}</Td>
               </Tr>
+              <Tr>
+                <Td>주소</Td>
+                <Td>{query.data?.adress}</Td>
+              </Tr>
             </Tbody>
             <Tfoot>
               <Tr>

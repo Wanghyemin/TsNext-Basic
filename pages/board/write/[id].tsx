@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Flex, Table, Tbody, Tfoot, Tr, Td, TableContainer, Textarea, Input } from "@chakra-ui/react";
+import { Flex, Table, Tbody, Tfoot, Tr, Td, TableContainer, Textarea, Input, Button } from "@chakra-ui/react";
 import { useMutation, useQuery } from "react-query";
 import { getBoardDetailAxios, putBoardDetailAxios } from "../../../commonModules/CommonAxios";
 import { useEffect, useLayoutEffect } from "react";
@@ -25,6 +25,7 @@ const modify = () => {
       title: "",
       userId: "",
       content: "",
+      adress:""
     },
     onSubmit: () => {
       mutate({
@@ -32,6 +33,7 @@ const modify = () => {
         title: formik.values.title,
         userId: formik.values.userId,
         content: formik.values.content,
+        adress: formik.values.adress
       })
       router.push("/board/list");
     },
@@ -45,6 +47,9 @@ const modify = () => {
       content: Yup.string()
         .max(500, "최대 500자만 가능합니다.")
         .required("Required"),
+      adress: Yup.string()
+        .max(500, "최대 500자만 가능합니다.")
+        .required("Required"),
     }),
   });
 
@@ -53,7 +58,12 @@ const modify = () => {
     formik.setFieldValue("title", query.data?.title);
     formik.setFieldValue("userId", query.data?.userId);
     formik.setFieldValue("content", query.data?.content);
+    formik.setFieldValue("adress", query.data?.adress);
   }, [query.data]);
+
+  const handleClick = () => {
+    
+  }
 
   return (
     <>
@@ -104,6 +114,22 @@ const modify = () => {
                 <Tr>
                   {formik.touched.content && formik.errors.content ? (
                     <Td>{formik.errors.content}</Td>
+                  ) : null}
+                </Tr>
+                <Tr>
+                  <Td rowSpan={2}>주소</Td>
+                  <Td>
+                  <Button onClick={handleClick}></Button>
+                  <Input
+                      id="adress"
+                      type="text"
+                      {...formik.getFieldProps("adress")}
+                    />
+                  </Td>
+                </Tr>
+                <Tr>
+                  {formik.touched.adress && formik.errors.adress ? (
+                    <Td>{formik.errors.adress}</Td>
                   ) : null}
                 </Tr>
               </Tbody>

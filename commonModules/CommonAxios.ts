@@ -1,7 +1,5 @@
 import { listType } from '../types';
 import axios from 'axios'
-import { useRouter } from "next/router";
-
 
 // 게시판 목록 Get
 export const getBoardListAxios = async() => {
@@ -21,6 +19,9 @@ export const postBoardDetailAxios = async(boardDetail:listType) => {
 			title: boardDetail.title,
 			userId: boardDetail.userId,
 			content: boardDetail.content,
+			adress1: boardDetail.adress1,
+			adress2: boardDetail.adress2,
+			adress3: boardDetail.adress3,
 		})
 }
 
@@ -35,5 +36,8 @@ export const putBoardDetailAxios = async(boardDetail:listType) => {
 		title: boardDetail.title,
 		userId: boardDetail.userId,
 		content: boardDetail.content,
+		adress1: boardDetail.adress1,
+		adress2: boardDetail.adress2,
+		adress3: boardDetail.adress3,
 	})
 }
