@@ -1,22 +1,36 @@
-
 import { listType } from "../../types";
 import PinkButton from "../../components/atoms/PinkButton";
-import { useRouter } from "next/router";
-import {  useQuery } from 'react-query';
-import { Flex, Table,  Thead,  Tbody,  Tfoot,  Tr,  Th,  Td,  TableContainer} from "@chakra-ui/react";
+import { useQuery } from "react-query";
+import {  Flex,  Table,  Thead,  Tbody,  Tfoot,  Tr,  Th,  Td,  TableContainer, Input, Button, } from "@chakra-ui/react";
 import { getBoardListAxios } from "../../commonModules/CommonAxios";
-
+import Link from "next/link";
+import { useState } from "react";
+import { Form } from "formik";
 
 const boardList = () => {
-  //const [board, setBoard] = useState([]);
-  const query = useQuery('data',getBoardListAxios,{cacheTime: 5000});//option
 
-  // 페이지 이동시 사용할 라우터
-  const router = useRouter();
+  // 데이터 목록 불러오기
+  const query = useQuery("data", getBoardListAxios, { cacheTime: 5000 }); //option
+  console.log(query)
+  const [searchKeyword, setSerchKeyword] = useState("")
+
+  // 검색데이터
+  const handleClick = (event:any) => {
+    event.preventDefault();
+    setSerchKeyword(event.target.search.value)
+  }
+  // 검색목록
+  const changedata = query.data?.filter( (data:listType) => {
+     return data.title?.replace(/ /g, '').includes(searchKeyword.replace(/ /g, ''));
+  })
 
   return (
     <>
       <Flex align="center" justify="center">
+        <form onSubmit={handleClick}>
+          <input name="search" />
+          <Button type="submit">검색</Button>
+        </form>
         <TableContainer w="80%">
           <Table variant="simple">
             <Thead bgColor={"yellow.50"}>
@@ -28,13 +42,13 @@ const boardList = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {query.data?.map((content: listType, index: number) => (
+              {changedata?.map((content: listType, index: number) => (
                 <Tr key={content.id}>
                   <Td>{index + 1}</Td>
-                  <Td
-                    onClick={() => router.push(`/board/detail/${content.id}`)}
-                  >
-                    {content.title}
+                  <Td>
+                    <Link href={`/board/detail/${content.id}`}>
+                      {content.title}
+                    </Link>
                   </Td>
                   <Td>{content.content}</Td>
                   <Td>{content.userId}</Td>
@@ -45,9 +59,11 @@ const boardList = () => {
               <Tr>
                 <Th></Th>
                 <Th></Th>
-                <Th>총 {query.data?.length} 건</Th>
+                <Th>총 {changedata?.length} 건</Th>
                 <Th>
-                  <PinkButton onClick={() => router.push("/board/write")}> 등 록 </PinkButton>
+                  <PinkButton>
+                    <Link href={`/board/write`}> 등 록 </Link>
+                  </PinkButton>
                 </Th>
               </Tr>
             </Tfoot>
@@ -56,6 +72,6 @@ const boardList = () => {
       </Flex>
     </>
   );
-}
+};
 
-export default boardList
+export default boardList;

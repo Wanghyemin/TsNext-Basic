@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import {  Table, Tbody, Tfoot, Tr, Td, TableContainer , Flex } from "@chakra-ui/react";
 import { useMutation, useQuery } from "react-query";
 import React, { useEffect } from "react";
+import Link from "next/link";
 
 const detail = () => {
 
@@ -17,7 +18,7 @@ const detail = () => {
   const query = useQuery( ['data', id] , () => getBoardDetailAxios(id), {cacheTime: 5000});
   //key 로 id를 넣어줘야 새로고침시 데이터 도출된다.
 
-  // // 삭제후 목록으로 이동
+  // 삭제후 목록으로 이동
   const handleDelete = (event:React.MouseEvent<HTMLButtonElement>) => {
     mutate(query.data?.id)
     router.push("/board/list")
@@ -49,8 +50,8 @@ const detail = () => {
             <Tfoot>
               <Tr>
                 <Td colSpan={2} style={{ textAlign: "center" }}>
-                  <PinkButton onClick={() => router.push(`/board/write/${query.data.id}`)}> 수 정 </PinkButton>
-                  <PurpleButton onClick={() => router.push("/board/list")}> 목 록 </PurpleButton>
+                  <PinkButton><Link href={`/board/write/${query.data?.id}`}> 수 정 </Link></PinkButton>
+                  <PurpleButton><Link href={`/board/list`}> 목 록 </Link></PurpleButton>
                   <PinkButton onClick={handleDelete}> 삭 제 </PinkButton>
                 </Td>
               </Tr>
