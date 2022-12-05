@@ -20,12 +20,15 @@ import { postBoardDetailAxios } from "../../../commonModules/CommonAxios";
 import DaumPostcode, { DaumPostcodeEmbed } from "react-daum-postcode";
 import { useState } from "react";
 import SearchForm from "../../../components/atoms/SeachForm";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 const write = () => {
   // Router를 사용하여 id값 도출
   const router = useRouter();
   const id: number = Number(router.query.id);
   const { mutate } = useMutation(postBoardDetailAxios);
+  //const [startDate, setStartDate] = useState(Date.now);
 
   //Formik : onChange를 자동으로 할 수 있음 + 유효성 검사를 간편하게 해줌
   const formik = useFormik({
@@ -36,6 +39,7 @@ const write = () => {
       adress1: "",
       adress2: "",
       adress3: "",
+      regDt : new Date(),
     },
     onSubmit: () => {
       mutate({
@@ -45,8 +49,10 @@ const write = () => {
         adress1: formik.values.adress1,
         adress2: formik.values.adress2,
         adress3: formik.values.adress3,
+        regDt : formik.values.regDt,
       });
-      router.push("/board/list");
+      console.log(formik.values.regDt)
+      //router.push("/board/list");
     },
     validationSchema: Yup.object({
       title: Yup.string()
@@ -75,12 +81,14 @@ const write = () => {
   };
 
   const onCompletePost = (data: any) => {
-    console.log(data);
     formik.setFieldValue("adress1", data?.zonecode);
     formik.setFieldValue("adress2", data?.roadAddress);
-    //setAddress(data.address);
-    //zonecode  roadAddress
   };
+
+  const handleFileChange = (event:any) => {
+    const files = event.target.files;
+    console.log(files)
+  }
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
@@ -183,7 +191,15 @@ const write = () => {
                     파일첨부
                   </Td>
                   <Td>
-                    <input type="file" id="fileUpload" />
+                    <input type="file" multiple onChange={handleFileChange}/>
+                  </Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    달력
+                  </Td>
+                  <Td>
+                  <DatePicker id="regDt" dateFormat="yyyy년 MM월 dd일" selected={formik.values.regDt} onChange={(res)=>{formik.setFieldValue("regDt", res)}}/>
                   </Td>
                 </Tr>
               </Tbody>
@@ -192,8 +208,7 @@ const write = () => {
                   <Td colSpan={2} style={{ textAlign: "center" }}>
                     <PinkButton type={"submit"}> 등 록 </PinkButton>
                     <PurpleButton onClick={() => router.push("/board/list")}>
-                      {" "}
-                      목 록{" "}
+                      목 록
                     </PurpleButton>
                   </Td>
                 </Tr>

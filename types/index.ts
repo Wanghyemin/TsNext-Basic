@@ -6,4 +6,6 @@ export interface listType {
     adress1?: string,
     adress2?: string,
     adress3?: string,
+    regDt? : Date,
+
   }

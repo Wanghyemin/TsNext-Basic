@@ -8,8 +8,8 @@ import * as Yup from "yup";
 import { Flex, Table, Tbody, Tfoot, Tr, Td, TableContainer, Textarea, Input, Button } from "@chakra-ui/react";
 import { useMutation, useQuery } from "react-query";
 import { getBoardDetailAxios, putBoardDetailAxios } from "../../../commonModules/CommonAxios";
-import { useEffect, useLayoutEffect } from "react";
-
+import { useEffect, useLayoutEffect, useState } from "react";
+import DaumPostcode, { DaumPostcodeEmbed } from "react-daum-postcode";
 
 const modify = () => {
   // Router를 사용하여 id값 도출
@@ -25,7 +25,9 @@ const modify = () => {
       title: "",
       userId: "",
       content: "",
-      adress:""
+      adress1: "",
+      adress2: "",
+      adress3: "",
     },
     onSubmit: () => {
       mutate({
@@ -33,7 +35,9 @@ const modify = () => {
         title: formik.values.title,
         userId: formik.values.userId,
         content: formik.values.content,
-        adress: formik.values.adress
+        adress1: formik.values.adress1,
+        adress2: formik.values.adress2,
+        adress3: formik.values.adress3,
       })
       router.push("/board/list");
     },
@@ -47,9 +51,6 @@ const modify = () => {
       content: Yup.string()
         .max(500, "최대 500자만 가능합니다.")
         .required("Required"),
-      adress: Yup.string()
-        .max(500, "최대 500자만 가능합니다.")
-        .required("Required"),
     }),
   });
 
@@ -58,13 +59,27 @@ const modify = () => {
     formik.setFieldValue("title", query.data?.title);
     formik.setFieldValue("userId", query.data?.userId);
     formik.setFieldValue("content", query.data?.content);
-    formik.setFieldValue("adress", query.data?.adress);
+    formik.setFieldValue("adress1", query.data?.adress1);
+    formik.setFieldValue("adress2", query.data?.adress2);
+    formik.setFieldValue("adress3", query.data?.adress3);
   }, [query.data]);
 
   const handleClick = () => {
     
   }
 
+    // 팝업창 상태 관리
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // 팝업창 열기
+  const openPostCode = () => {
+    setIsPopupOpen(true);
+  };
+  const onCompletePost = (data: any) => {
+    formik.setFieldValue("adress1", data?.zonecode);
+    formik.setFieldValue("adress2", data?.roadAddress);
+    //setAddress(data.address);
+    //zonecode  roadAddress
+  };
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
@@ -117,20 +132,36 @@ const modify = () => {
                   ) : null}
                 </Tr>
                 <Tr>
-                  <Td rowSpan={2}>주소</Td>
+                  <Td rowSpan={3}>주소
+                    <Button onClick={openPostCode}>주소찾기</Button>
+                  </Td>
                   <Td>
-                  <Button onClick={handleClick}></Button>
                   <Input
-                      id="adress"
-                      type="text"
-                      {...formik.getFieldProps("adress")}
+                      id="adress1"
+                      {...formik.getFieldProps("adress1")}
+                      readOnly
+                      placeholder="우편번호"
                     />
                   </Td>
                 </Tr>
                 <Tr>
-                  {formik.touched.adress && formik.errors.adress ? (
-                    <Td>{formik.errors.adress}</Td>
-                  ) : null}
+                  <Td>
+                    <Input
+                      id="adress2"
+                      readOnly
+                      placeholder="도로명주소"
+                      {...formik.getFieldProps("adress2")}
+                    />
+                  </Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <Input
+                      id="adress3"
+                      placeholder="상세주소"
+                      {...formik.getFieldProps("adress3")}
+                    />
+                  </Td>
                 </Tr>
               </Tbody>
               <Tfoot>
@@ -145,6 +176,17 @@ const modify = () => {
           </TableContainer>
         </Flex>
       </form>
+
+      <div className="popupDom">
+        {isPopupOpen && (
+          <DaumPostcodeEmbed
+            autoClose={true}
+            onComplete={onCompletePost}
+            defaultQuery="천호대로 1077"
+          />
+        )}
+      </div>
+
     </>
   );
 }

@@ -48,7 +48,7 @@ const detail = () => {
               </Tr>
               <Tr>
                 <Td>주소</Td>
-                <Td>{query.data?.adress}</Td>
+                <Td>[ {query.data?.adress1} ] {query.data?.adress2} {query.data?.adress3} </Td>
               </Tr>
             </Tbody>
             <Tfoot>
