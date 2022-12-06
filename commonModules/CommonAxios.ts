@@ -22,6 +22,8 @@ export const postBoardDetailAxios = async(boardDetail:listType) => {
 			adress1: boardDetail.adress1,
 			adress2: boardDetail.adress2,
 			adress3: boardDetail.adress3,
+			regDt : boardDetail.regDt,
+			fileName : boardDetail.fileName
 		})
 }
 
@@ -39,5 +41,7 @@ export const putBoardDetailAxios = async(boardDetail:listType) => {
 		adress1: boardDetail.adress1,
 		adress2: boardDetail.adress2,
 		adress3: boardDetail.adress3,
+		regDt : boardDetail.regDt,
+		fileName : boardDetail.fileName
 	})
 }

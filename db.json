@@ -7,7 +7,8 @@
       "id": 6,
       "adress1": "",
       "adress2": "",
-      "adress3": ""
+      "adress3": "",
+      "regDt": ""
     },
     {
       "title": "게시글 추가 제목",
@@ -16,7 +17,8 @@
       "id": 11,
       "adress1": "",
       "adress2": "",
-      "adress3": ""
+      "adress3": "",
+      "regDt": ""
     },
     {
       "title": "챠크라 테스트",
@@ -25,7 +27,8 @@
       "id": 19,
       "adress1": "",
       "adress2": "",
-      "adress3": ""
+      "adress3": "",
+      "regDt": ""
     },
     {
       "title": "공통모듈 만들기",
@@ -34,25 +37,8 @@
       "id": 20,
       "adress1": "",
       "adress2": "",
-      "adress3": ""
-    },
-    {
-      "title": "mm",
-      "userId": "m",
-      "content": "mm",
-      "id": 24,
-      "adress1": "",
-      "adress2": "",
-      "adress3": ""
-    },
-    {
-      "title": "1212",
-      "userId": "12",
-      "content": "12",
-      "id": 30,
-      "adress1": "",
-      "adress2": "",
-      "adress3": ""
+      "adress3": "",
+      "regDt": ""
     },
     {
       "title": "리액트쿼리등록",
@@ -61,7 +47,8 @@
       "id": 32,
       "adress1": "",
       "adress2": "",
-      "adress3": ""
+      "adress3": "",
+      "regDt": ""
     },
     {
       "title": "가나다",
@@ -70,16 +57,8 @@
       "id": 33,
       "adress1": "",
       "adress2": "",
-      "adress3": ""
-    },
-    {
-      "title": "a",
-      "userId": "a",
-      "content": "a",
-      "adress1": "",
-      "adress2": "",
       "adress3": "",
-      "id": 34
+      "regDt": ""
     },
     {
       "title": "샘플",
@@ -88,115 +67,38 @@
       "adress1": "05340",
       "adress2": "서울 강동구 천호대로 1077",
       "adress3": "래미안강동펠리스 101-806",
-      "id": 35
+      "id": 35,
+      "regDt": ""
     },
     {
-      "title": "k",
-      "userId": "kk",
-      "content": "kkk",
-      "adress1": "05340",
-      "adress2": "서울 강동구 천호대로 1077",
-      "adress3": "kkkk",
-      "id": 36
-    },
-    {
-      "title": "j",
-      "userId": "jj",
-      "content": "j",
+      "title": "f",
+      "userId": "f",
+      "content": "f",
       "adress1": "",
       "adress2": "",
       "adress3": "",
-      "id": 37
-    },
-    {
-      "title": "날짜 테스트",
-      "userId": "날짜 테스트",
-      "content": "날짜 테스트",
-      "adress1": "",
-      "adress2": "",
-      "adress3": "",
-      "id": 38
-    },
-    {
-      "title": "날짜 테스트",
-      "userId": "날짜 테스트",
-      "content": "날짜 테스트",
-      "adress1": "",
-      "adress2": "",
-      "adress3": "",
-      "id": 39
-    },
-    {
-      "title": "날짜 테스트",
-      "userId": "날짜 테스트",
-      "content": "날짜 테스트",
-      "adress1": "",
-      "adress2": "",
-      "adress3": "",
-      "id": 40
-    },
-    {
-      "title": "날짜 테스트",
-      "userId": "날짜 테스트",
-      "content": "날짜 테스트",
-      "adress1": "",
-      "adress2": "",
-      "adress3": "",
-      "id": 41
-    },
-    {
-      "title": "날짜 테스트",
-      "userId": "날짜 테스트",
-      "content": "날짜 테스트",
-      "adress1": "",
-      "adress2": "",
-      "adress3": "",
-      "id": 42
-    },
-    {
-      "title": "날짜 테스트",
-      "userId": "날짜 테스트",
-      "content": "날짜 테스트",
-      "adress1": "",
-      "adress2": "",
-      "adress3": "",
-      "id": 43
-    },
-    {
-      "title": "날짜 테스트",
-      "userId": "날짜 테스트",
-      "content": "날짜 테스트",
-      "adress1": "",
-      "adress2": "",
-      "adress3": "",
+      "regDt": "22.12.6",
+      "fileName": [
+        "KOF APP_v1.3.pptx",
+        "개발일정_201128.xlsx"
+      ],
       "id": 44
     },
     {
-      "title": "날짜 테스트",
-      "userId": "날짜 테스트",
-      "content": "날짜 테스트",
+      "title": "파일 테스트",
+      "userId": "포롭",
+      "content": "파일테스트입니다.",
       "adress1": "",
       "adress2": "",
       "adress3": "",
+      "regDt": "22.12.6",
+      "fileName": [
+        "2022.12.01_KOF Admin_v0.93.pptx",
+        "2022.12.02_KOF 스마트양어장_회의록.docx",
+        "KOF APP_v1.3.pptx",
+        "개발일정_201128.xlsx"
+      ],
       "id": 45
-    },
-    {
-      "title": "날짜 테스트",
-      "userId": "날짜 테스트",
-      "content": "날짜 테스트",
-      "adress1": "",
-      "adress2": "",
-      "adress3": "",
-      "id": 46
-    },
-    {
-      "title": "날짜 테스트",
-      "userId": "날짜 테스트",
-      "content": "날짜 테스트",
-      "adress1": "",
-      "adress2": "",
-      "adress3": "",
-      "id": 47
     }
   ]
 }

@@ -22,6 +22,7 @@ import { useState } from "react";
 import SearchForm from "../../../components/atoms/SeachForm";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import { ko } from 'date-fns/locale';
 
 const write = () => {
   // Router를 사용하여 id값 도출
@@ -29,6 +30,15 @@ const write = () => {
   const id: number = Number(router.query.id);
   const { mutate } = useMutation(postBoardDetailAxios);
   //const [startDate, setStartDate] = useState(Date.now);
+
+  const formatDate = (date:Date) => {
+    const year:string = date.getFullYear().toString().substring(2);
+    var month:string = (date.getMonth() + 1).toString();
+    //month = month >= 10 ? month : '0' + month;
+    var day = date.getDate().toString();
+    //day = day >= 10 ? day : '0' + day;
+    return [year, month, day].join('.');
+  }
 
   //Formik : onChange를 자동으로 할 수 있음 + 유효성 검사를 간편하게 해줌
   const formik = useFormik({
@@ -39,7 +49,8 @@ const write = () => {
       adress1: "",
       adress2: "",
       adress3: "",
-      regDt : new Date(),
+      regDt : new Date(), // 포믹 regDt는 Date
+      fileName : []
     },
     onSubmit: () => {
       mutate({
@@ -49,10 +60,10 @@ const write = () => {
         adress1: formik.values.adress1,
         adress2: formik.values.adress2,
         adress3: formik.values.adress3,
-        regDt : formik.values.regDt,
+        regDt : formatDate(formik.values.regDt), // mutate regDt는 string
+        fileName : formik.values.fileName
       });
-      console.log(formik.values.regDt)
-      //router.push("/board/list");
+      router.push("/board/list");
     },
     validationSchema: Yup.object({
       title: Yup.string()
@@ -75,20 +86,17 @@ const write = () => {
     setIsPopupOpen(true);
   };
 
-  // 팝업창 닫기
-  const closePostCode = () => {
-    setIsPopupOpen(false);
-  };
-
   const onCompletePost = (data: any) => {
     formik.setFieldValue("adress1", data?.zonecode);
     formik.setFieldValue("adress2", data?.roadAddress);
   };
 
   const handleFileChange = (event:any) => {
-    const files = event.target.files;
-    console.log(files)
+    const files:File[] = Array.prototype.slice.call(event.target.files)
+    const fileArr: string[] = files.map( file => file.name);
+    formik.setFieldValue("fileName", fileArr)
   }
+
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
@@ -192,14 +200,19 @@ const write = () => {
                   </Td>
                   <Td>
                     <input type="file" multiple onChange={handleFileChange}/>
+                    {formik.values.fileName?.map((name,index) => (<div key={index}>{name}<br/></div>))}
                   </Td>
                 </Tr>
                 <Tr>
                   <Td>
-                    달력
+                    작성일
                   </Td>
                   <Td>
-                  <DatePicker id="regDt" dateFormat="yyyy년 MM월 dd일" selected={formik.values.regDt} onChange={(res)=>{formik.setFieldValue("regDt", res)}}/>
+                  <DatePicker locale={ko}  id="regDt" dateFormat="yyyy년 MM월 dd일" 
+                  selected={formik.values.regDt} 
+                  onChange={(res)=>{
+                    formik.setFieldValue("regDt", res);
+                    }}/>
                   </Td>
                 </Tr>
               </Tbody>
