@@ -23,6 +23,7 @@ import SearchForm from "../../../components/atoms/SeachForm";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { ko } from 'date-fns/locale';
+import { CommonAddrModal } from "../../../commonModules/CommonAddrModal";
 
 const write = () => {
   // Router를 사용하여 id값 도출
@@ -32,11 +33,14 @@ const write = () => {
   //const [startDate, setStartDate] = useState(Date.now);
 
   const formatDate = (date:Date) => {
+
+    console.log(date)
+
     const year:string = date.getFullYear().toString().substring(2);
     var month:string = (date.getMonth() + 1).toString();
-    //month = month >= 10 ? month : '0' + month;
+    if(month.length === 1){month = '0' + month}
     var day = date.getDate().toString();
-    //day = day >= 10 ? day : '0' + day;
+    if(day.length === 1){day = '0' + day}
     return [year, month, day].join('.');
   }
 
@@ -89,6 +93,7 @@ const write = () => {
   const onCompletePost = (data: any) => {
     formik.setFieldValue("adress1", data?.zonecode);
     formik.setFieldValue("adress2", data?.roadAddress);
+    setIsPopupOpen( current => !current );
   };
 
   const handleFileChange = (event:any) => {
@@ -230,16 +235,7 @@ const write = () => {
           </TableContainer>
         </Flex>
       </form>
-
-      <div className="popupDom">
-        {isPopupOpen && (
-          <DaumPostcodeEmbed
-            autoClose={true}
-            onComplete={onCompletePost}
-            defaultQuery="천호대로 1077"
-          />
-        )}
-      </div>
+      {isPopupOpen &&<CommonAddrModal onComplete={onCompletePost} isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} />}
     </>
   );
 };

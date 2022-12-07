@@ -50,6 +50,14 @@ const detail = () => {
                 <Td>주소</Td>
                 <Td>[ {query.data?.adress1} ] {query.data?.adress2} {query.data?.adress3} </Td>
               </Tr>
+              <Tr>
+                <Td>작성일</Td>
+                <Td>{query.data?.regDt}</Td>
+              </Tr>
+              <Tr>
+                <Td>첨부파일</Td>
+                <Td>{query.data?.fileName?.map((name:string)=>(<div>{name}<br/></div>))}</Td>
+              </Tr>
             </Tbody>
             <Tfoot>
               <Tr>

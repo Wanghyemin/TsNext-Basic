@@ -10,6 +10,10 @@ import { useMutation, useQuery } from "react-query";
 import { getBoardDetailAxios, putBoardDetailAxios } from "../../../commonModules/CommonAxios";
 import { useEffect, useLayoutEffect, useState } from "react";
 import DaumPostcode, { DaumPostcodeEmbed } from "react-daum-postcode";
+import { CommonAddrModal } from "../../../commonModules/CommonAddrModal";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import { ko } from 'date-fns/locale';
 
 const modify = () => {
   // Router를 사용하여 id값 도출
@@ -28,6 +32,7 @@ const modify = () => {
       adress1: "",
       adress2: "",
       adress3: "",
+      regDt : new Date(),
     },
     onSubmit: () => {
       mutate({
@@ -38,6 +43,7 @@ const modify = () => {
         adress1: formik.values.adress1,
         adress2: formik.values.adress2,
         adress3: formik.values.adress3,
+        regDt: formatDate(formik.values.regDt),
       })
       router.push("/board/list");
     },
@@ -54,6 +60,26 @@ const modify = () => {
     }),
   });
 
+  const changeDateFormat = (date:string) => {
+    let dateDate:Date = new Date();
+    if(!date){return dateDate}
+    else{
+      date = '20' + date;
+      dateDate = new Date(date)
+      return dateDate;
+    }
+  }
+  const formatDate = (date:Date) => {
+
+    console.log(date)
+
+    const year:string = date.getFullYear().toString().substring(2);
+    var month:string = (date.getMonth() + 1).toString();
+    if(month.length === 1){month = '0' + month}
+    var day = date.getDate().toString();
+    if(day.length === 1){day = '0' + day}
+    return [year, month, day].join('.');
+  }
   useEffect(() => {
     formik.setFieldValue("id", query.data?.id);
     formik.setFieldValue("title", query.data?.title);
@@ -62,6 +88,7 @@ const modify = () => {
     formik.setFieldValue("adress1", query.data?.adress1);
     formik.setFieldValue("adress2", query.data?.adress2);
     formik.setFieldValue("adress3", query.data?.adress3);
+    formik.setFieldValue("regDt", changeDateFormat(query.data?.regDt));
   }, [query.data]);
 
   const handleClick = () => {
@@ -79,6 +106,7 @@ const modify = () => {
     formik.setFieldValue("adress2", data?.roadAddress);
     //setAddress(data.address);
     //zonecode  roadAddress
+    setIsPopupOpen( current => !current );
   };
   return (
     <>
@@ -163,6 +191,18 @@ const modify = () => {
                     />
                   </Td>
                 </Tr>
+                <Tr>
+                  <Td>
+                    작성일
+                  </Td>
+                  <Td>
+                  <DatePicker locale={ko}  id="regDt" dateFormat="yyyy년 MM월 dd일" 
+                  selected={formik.values.regDt} 
+                  onChange={(res)=>{
+                    formik.setFieldValue("regDt", res);
+                    }}/>
+                  </Td>
+                </Tr>
               </Tbody>
               <Tfoot>
                 <Tr>
@@ -177,15 +217,7 @@ const modify = () => {
         </Flex>
       </form>
 
-      <div className="popupDom">
-        {isPopupOpen && (
-          <DaumPostcodeEmbed
-            autoClose={true}
-            onComplete={onCompletePost}
-            defaultQuery="천호대로 1077"
-          />
-        )}
-      </div>
+      {isPopupOpen &&<CommonAddrModal onComplete={onCompletePost} isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} />}
 
     </>
   );
