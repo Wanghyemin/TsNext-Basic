@@ -54,15 +54,15 @@ const modify = () => {
       userId: Yup.string()
         .max(10, "최대 10자만 가능합니다.")
         .required("Required"),
-      content: Yup.string()
+        content: Yup.string()
         .max(500, "최대 500자만 가능합니다.")
         .required("Required"),
-    }),
-  });
-  return (
-    <>
+      }),
+    });
+    return (
+      <>
       <form onSubmit={formik.handleSubmit}>
-        <Flex align="center" justify="center">
+      <Flex align="center" justify="center">
           <TableContainer w="60%">
             <Table variant="simple">
               <Tbody>
