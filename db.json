@@ -1,82 +1,87 @@
 {
   "data": [
     {
-      "title": "수정합니다.fffff",
-      "userId": "fourLab",
-      "content": "최종 게시글 수정합니다.",
-      "id": 3
-    },
-    {
       "title": "테스트",
-      "userId": 2,
+      "userId": "2",
       "content": "Chakra Ui 적용합니다.",
-      "id": 6
-    },
-    {
-      "title": "게시글 수정?",
-      "userId": "관리자",
-      "content": "게시글 수정",
-      "id": 8
-    },
-    {
-      "title": "현대트랜시스 동반성장 ",
-      "userId": 2,
-      "content": "v",
-      "id": 10
+      "id": 6,
+      "adress1": "",
+      "adress2": "",
+      "adress3": "",
+      "regDt": ""
     },
     {
       "title": "게시글 추가 제목",
       "userId": "포랩1234",
       "content": "게시글 추가합니다~~~",
-      "id": 11
-    },
-    {
-      "title": "게시글 등록",
-      "userId": "작성",
-      "content": "dfdfdfdfd",
-      "id": 14
-    },
-    {
-      "title": "게시글 수정",
-      "userId": "Formik",
-      "content": "게시글 수정 formik 사용해서 완료 ^O^",
-      "id": 15
-    },
-    {
-      "title": "formik 테스트",
-      "userId": "formik",
-      "content": "Formik 테스트 진행합니다.",
-      "id": 17
-    },
-    {
-      "title": "useFormik",
-      "userId": "forfor",
-      "content": "useformik 으로 작성합니다.",
-      "id": 18
+      "id": 11,
+      "adress1": "",
+      "adress2": "",
+      "adress3": "",
+      "regDt": ""
     },
     {
       "title": "챠크라 테스트",
       "userId": "포랩보드",
       "content": "챠크라 적용합니다",
-      "id": 19
+      "id": 19,
+      "adress1": "",
+      "adress2": "",
+      "adress3": "",
+      "regDt": ""
     },
     {
       "title": "공통모듈 만들기",
       "userId": "모듀리",
       "content": "공통모듈 만들기",
-      "id": 20
+      "id": 20,
+      "adress1": "",
+      "adress2": "",
+      "adress3": "",
+      "regDt": ""
     },
     {
-      "title": "공통모듈",
-      "userId": "공통모듈",
-      "content": "공통모듈",
-      "id": 21
+      "title": "리액트쿼리등록",
+      "userId": "쿼리",
+      "content": "등록",
+      "id": 32,
+      "adress1": "",
+      "adress2": "",
+      "adress3": "",
+      "regDt": ""
     },
     {
-      "title": "ㅁㅁ",
-      "userId": "ㅁㅁ",
-      "content": "ㅁㅁ",
-      "id": 22
+      "title": "샘플",
+      "userId": "샘플",
+      "content": "샘플입니다",
+      "adress1": "05340",
+      "adress2": "서울 강동구 천호대로 1077",
+      "adress3": "래미안강동펠리스 101-806",
+      "id": 35,
+      "regDt": ""
+    },
+    {
+      "title": "9",
+      "userId": "9",
+      "content": "9",
+      "adress1": "05854",
+      "adress2": "서울 송파구 송파대로 201",
+      "adress3": "테라타워 A동",
+      "id": 46
+    },
+    {
+      "title": "날짜 파일 수정 테스트",
+      "userId": "j",
+      "content": "jj",
+      "adress1": "05854",
+      "adress2": "서울 송파구 송파대로 201",
+      "adress3": "411호",
+      "fileName": [
+        "2022.12.02_KOF 스마트양어장_회의록.docx",
+        "KOF APP_v1.3.pptx",
+        "개발일정_201128.xlsx"
+      ],
+      "id": 47
     }
   ]
 }

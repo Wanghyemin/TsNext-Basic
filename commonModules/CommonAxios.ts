@@ -1,20 +1,47 @@
+import { listType } from '../types';
 import axios from 'axios'
 
-const commonAxios = axios.create({
-	baseURL: "http://localhost:8000",
-    headers: {  "Content-Type": `application/json` },
-	timeout: 1000
-})
+// 게시판 목록 Get
+export const getBoardListAxios = async() => {
+	const {data} = await axios.get('http://localhost:8000/data');
+	return data;
+}
+// 게시판 상세페이지 Get
+export const  getBoardDetailAxios = async(id:number) => {
+	const {data} = await axios.get(`http://localhost:8000/data/${id}`)
+	return data;
+}
 
-commonAxios.interceptors.request.use(
-	function (config) {
-        console.log("저는 공통모듈 commonAxios입니다.")
-		return config
-	},
-	function (error) {
-        console.log("ERROR : " + error)
-		return Promise.reject(error);
-	}
-)
+// 게시판 등록 Post
+export const postBoardDetailAxios = async(boardDetail:listType) => {
+	await axios
+		.post(`http://localhost:8000/data`,{
+			title: boardDetail.title,
+			userId: boardDetail.userId,
+			content: boardDetail.content,
+			adress1: boardDetail.adress1,
+			adress2: boardDetail.adress2,
+			adress3: boardDetail.adress3,
+			regDt : boardDetail.regDt,
+			fileName : boardDetail.fileName
+		})
+}
 
-export default commonAxios;
+// 게시판 상세페이지 삭제 Delete
+export const delBoardDetailAxios = async(id:number) => {
+	await axios.delete(`http://localhost:8000/data/${id}`);
+}
+
+// 게시판 상세페이지 수정 Put
+export const putBoardDetailAxios = async(boardDetail:listType) => {
+	await axios.put(`http://localhost:8000/data/${boardDetail.id}`,{
+		title: boardDetail.title,
+		userId: boardDetail.userId,
+		content: boardDetail.content,
+		adress1: boardDetail.adress1,
+		adress2: boardDetail.adress2,
+		adress3: boardDetail.adress3,
+		regDt : boardDetail.regDt,
+		fileName : boardDetail.fileName
+	})
+}
